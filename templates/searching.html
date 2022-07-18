@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Avilable Fruits and Vegitables</title>
+    </head>
+    <body>
+        <h1>Searching Here</h1>
+        <form action="/display" method="post">
+            <p>Serching By Pincode <input type = "integer" name = "spincode" /></p>
+            <p>Searching By Vegetable Name <input type = "text" name = "svegetable" /></p>
+            <p>Searching By Fruit Name <input type = "text" name = "sfruit" /></p>
+            <p><input type = "submit" value = "Submit" /></p>
+        </form>
+        <table>
+            {% for values in val %}
+                <tr>
+                    <td>{{values}}</td>
+                </tr>
+            {% endfor %}
+        </table>    
+    </body>
+</html>

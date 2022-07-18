@@ -1,1 +1,2 @@
-# Demo_Project
+# demo-app
+Assignment

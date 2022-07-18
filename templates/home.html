@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
+</head>
+<body>
+<form style="text-align: center" action="/submit" method= "post">
+    <p>Pincode <input type = "integer" name = "pincode" /></p>
+    <p>Fruit Name <input type = "text" name = "fruit" /></p>
+    <p>Vegetable Name <input type = "integer" name = "vegetable" /></p>
+    <p><input type = "submit" value = "Submit" /></p>
+</form>
+</body>
+</html>
