@@ -1,4 +1,4 @@
-FROM python:3
+FROM ubuntu
 
 RUN apt-get clean \
     && apt-get -y update
@@ -11,9 +11,10 @@ RUN apt-get -y install \
 WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
-RUN pip install -r requirements.txt --src /usr/local/src
+RUN apt-get -y install python3-pip
+RUN pip3 install -r requirements.txt --src /usr/local/src
 
 COPY . .
 
 EXPOSE 5000
-CMD [ "python", "flaskapi.py" ]
+CMD [ "python3", "flaskapi.py" ]
