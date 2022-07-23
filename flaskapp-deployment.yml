@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
         - name: flaskapi
-          image: flask-api
-          imagePullPolicy: Never
+          image: docker.io/rajasur90/flask-api:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           env:
@@ -27,6 +27,8 @@ spec:
                 secretKeyRef:
                   name: flaskapi-secrets
                   key: db_root_password
+            - name: db_name
+              value: flaskapi
             - name: db_name
               value: flaskapi
 
@@ -40,6 +42,7 @@ spec:
   - port: 5000
     protocol: TCP
     targetPort: 5000
+    nodePort: 30000 
   selector:
     app: flaskapi
   type: LoadBalancer

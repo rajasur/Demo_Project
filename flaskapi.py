@@ -7,16 +7,15 @@ app = Flask(__name__)
 mysql = MySQL()
 
 # MySQL configurations
-app.config["MYSQL_DATABASE_USER"] = "root"
-app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv("db_root_password")
-app.config["MYSQL_DATABASE_DB"] = os.getenv("db_name")
-app.config["MYSQL_DATABASE_HOST"] = os.getenv("MYSQL_SERVICE_HOST")
-app.config["MYSQL_DATABASE_PORT"] = int(os.getenv("MYSQL_SERVICE_PORT"))
+app.config["MYSQL_DATABASE_USER"] = os.getenv('MYSQL_ROOT_USER', 'root')
+app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv('db_root_password','admin')
+app.config["MYSQL_DATABASE_DB"] = os.getenv('db_name')
+app.config["MYSQL_DATABASE_HOST"] = os.getenv('MYSQL_SERVICE_HOST','localhost')
+app.config["MYSQL_DATABASE_PORT"] = os.getenv('MYSQL_SERVICE_PORT','3306')
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
 @app.route('/')
-
 def hello_world():
     return render_template('home.html')
 
