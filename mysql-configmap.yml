@@ -4,4 +4,4 @@ metadata:
   name: mysql-configmap
 data:
   MYSQL_DATABASE_PORT: "3306"
-  MYSQL_DATABASE_PORT: mysql
+  MYSQL_DATABASE_HOST: mysql
