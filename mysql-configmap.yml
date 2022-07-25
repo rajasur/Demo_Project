@@ -3,6 +3,5 @@ kind: ConfigMap
 metadata:
   name: mysql-configmap
 data:
-  database_url: mysql
-  MYSQL_ROOT_PORT: "3306"
-  MYSQL_DATABASE_HOST: "<plase holder>"
+  MYSQL_DATABASE_PORT: "3306"
+  MYSQL_DATABASE_PORT: mysql
