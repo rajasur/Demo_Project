@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flaskapi
-          image: docker.io/rajasur90/flask-api:v1
+          image: docker.io/rajasur90/flask-api:v2
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
