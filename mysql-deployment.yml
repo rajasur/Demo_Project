@@ -21,7 +21,7 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: flaskapi-secret
+              name: flaskapi-secrets
               key: db_root_password
         ports:
         - containerPort: 3306
