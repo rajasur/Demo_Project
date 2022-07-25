@@ -28,9 +28,7 @@ spec:
                   name: flaskapi-secrets
                   key: db_root_password
             - name: db_name
-              value: flaskapi
-            - name: db_name
-              value: flaskapi
+              value: Food
             - name: MYSQL_SERVICE_PORT
               valueFrom:
                 configMapKeyRef:
