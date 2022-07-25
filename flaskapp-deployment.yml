@@ -33,12 +33,12 @@ spec:
               value: flaskapi
             - name: MYSQL_SERVICE_PORT
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: MYSQL_DATABASE_PORT
             - name: MYSQL_SERVICE_HOST
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   name: mysql-configmap
                   key: MYSQL_DATABASE_HOST
 
