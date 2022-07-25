@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: flaskapi
-          image: docker.io/rajasur90/flask-api:v2
+          image: docker.io/rajasur90/flask-demo-prj:v2
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
@@ -54,4 +54,4 @@ spec:
     nodePort: 30000 
   selector:
     app: flaskapi
-  type: LoadBalancer
+  type: NodePort
