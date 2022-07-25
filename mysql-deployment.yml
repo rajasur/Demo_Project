@@ -14,7 +14,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: docker.io/rajasur90/flask-api-database:latest
+      - image: docker.io/rajasur90/flask-api-database:v3
         name: mysql
         env:
           # Use secret in real usage
