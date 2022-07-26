@@ -40,12 +40,11 @@ spec:
                   name: mysql-configmap
                   key: MYSQL_DATABASE_HOST
 
-
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: flaskapi-service
+  name: flaskapi
 spec:
   ports:
   - port: 5000
