@@ -49,8 +49,7 @@ spec:
   ports:
   - port: 5000
     protocol: TCP
-    targetPort: 5000
-    nodePort: 30000 
+    targetPort: 5000 
   type: NodePort
   selector:
     app: flaskapi
