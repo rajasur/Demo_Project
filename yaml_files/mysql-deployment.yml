@@ -47,5 +47,4 @@ spec:
   - port: 3306
     protocol: TCP
     targetPort: 3306
-   type: ClusterIP
-  
+  type: ClusterIP

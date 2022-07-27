@@ -7,19 +7,18 @@ app = Flask(__name__)
 mysql = MySQL()
 
 # MySQL Local configurations
-'''
+
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'Ahcc@12345'
 app.config['MYSQL_DATABASE_DB'] = 'Food'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 app.config["MYSQL_DATABASE_PORT"] = 3306
-'''
-# MySQL configurations
+'''# MySQL configurations
 app.config["MYSQL_DATABASE_USER"] = os.getenv('MYSQL_ROOT_USER', 'root')
 app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv('db_root_password','admin')
 app.config["MYSQL_DATABASE_DB"] = os.getenv('db_name')
 app.config["MYSQL_DATABASE_HOST"] = os.getenv('MYSQL_SERVICE_HOST','localhost')
-app.config["MYSQL_DATABASE_PORT"] = int(os.getenv('MYSQL_SERVICE_PORT','3306'))
+app.config["MYSQL_DATABASE_PORT"] = int(os.getenv('MYSQL_SERVICE_PORT','3306'))'''
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
@@ -40,7 +39,8 @@ def create():
        
 @app.route('/display',methods=['GET','POSt'])
 def Searching():
-    val='a'        
+    val='a'
+    spincode,svegetable,sfruit=None,None,None        
     if request.method=='POST':
         if request.form['submit_button'] == 'All-Data':
             cursor.execute("USE Food")
@@ -50,7 +50,8 @@ def Searching():
         else:
             d=dict()
             l=list()
-            spincode=int(request.form['spincode'])
+            if(request.form['spincode']!=''):
+                spincode=int(request.form['spincode'])
             svegetable=str(request.form['svegetable'])
             sfruit=str(request.form['sfruit'])
             cursor.execute("USE Food")
@@ -71,8 +72,9 @@ def delete():
     print(dfr)
     print(dvg) 
     if request.method=="POST":
-        if request.form['submit_button'] == 'Delete': 
-            dpi=int(request.form['dspincode'])
+        if request.form['submit_button'] == 'Delete':
+            if(request.form['dspincode']!=''):
+                dpi=int(request.form['dspincode'])
             dfr=str(request.form['dsfruit'])
             dvg=str(request.form['dsvegetable'])
             print(dpi)
