@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" type="text/css">
+</head>
+<body style="background-color:blueviolet">
+    <div class="topnav">
+        <a class="active" href="#">Home</a>
+        <a href="{{ url_for('static', filename='home.html') }}">Add</a>
+        <a href="{{ url_for('static', filename='deleted.html') }}">Delete</a>
+        <a href="{{ url_for('static', filename='searching.html') }}">Search</a>
+      </div>
+      
+      <div style="padding-left:16px">
+        <h2>Food Application Webapp</h2>
+      </div>
+</body>
+</html>
