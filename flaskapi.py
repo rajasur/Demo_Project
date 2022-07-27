@@ -8,17 +8,17 @@ mysql = MySQL()
 
 # MySQL Local configurations
 
-app.config['MYSQL_DATABASE_USER'] = 'root'
+'''app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'Ahcc@12345'
 app.config['MYSQL_DATABASE_DB'] = 'Food'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config["MYSQL_DATABASE_PORT"] = 3306
-'''# MySQL configurations
+app.config["MYSQL_DATABASE_PORT"] = 3306'''
+# MySQL configurations
 app.config["MYSQL_DATABASE_USER"] = os.getenv('MYSQL_ROOT_USER', 'root')
 app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv('db_root_password','admin')
 app.config["MYSQL_DATABASE_DB"] = os.getenv('db_name')
 app.config["MYSQL_DATABASE_HOST"] = os.getenv('MYSQL_SERVICE_HOST','localhost')
-app.config["MYSQL_DATABASE_PORT"] = int(os.getenv('MYSQL_SERVICE_PORT','3306'))'''
+app.config["MYSQL_DATABASE_PORT"] = int(os.getenv('MYSQL_SERVICE_PORT','3306'))
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
