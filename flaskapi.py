@@ -1,29 +1,51 @@
 import os
 from flaskext.mysql import MySQL
-from flask import jsonify, request, render_template, Flask
+from flask import Response, jsonify, request, render_template, Flask
 import pymysql
+import prometheus_client
+from prometheus_client.core import CollectorRegistry
+from prometheus_client import Summary, Counter, Histogram, Enum
+
+_INF=float('inf')
+graphs=dict()
+graphs['c']=Counter('python_request_operations_total','The total number of processed request')
+graphs['h']=Histogram('Python_request_duration_second','Histogram for the duration od second',buckets={1, 2, 5, 6, 10, _INF})
+graphs['s']=Summary('request_latency_seconds', 'Description of summary')
+graphs['e']=Enum('my_task_state', 'Description of enum',states=['starting', 'running', 'stopped'])
 app = Flask(__name__)
+#metrics = PrometheusMetrics(app)
 
 mysql = MySQL()
 
 # MySQL Local configurations
 
-'''app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'Ahcc@12345'
 app.config['MYSQL_DATABASE_DB'] = 'Food'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config["MYSQL_DATABASE_PORT"] = 3306'''
+app.config["MYSQL_DATABASE_PORT"] = 3306
 # MySQL configurations
-app.config["MYSQL_DATABASE_USER"] = os.getenv('MYSQL_ROOT_USER', 'root')
+'''app.config["MYSQL_DATABASE_USER"] = os.getenv('MYSQL_ROOT_USER', 'root')
 app.config["MYSQL_DATABASE_PASSWORD"] = os.getenv('db_root_password','admin')
 app.config["MYSQL_DATABASE_DB"] = os.getenv('db_name')
 app.config["MYSQL_DATABASE_HOST"] = os.getenv('MYSQL_SERVICE_HOST','localhost')
-app.config["MYSQL_DATABASE_PORT"] = int(os.getenv('MYSQL_SERVICE_PORT','3306'))
+app.config["MYSQL_DATABASE_PORT"] = int(os.getenv('MYSQL_SERVICE_PORT','3306'))'''
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
+@app.route('/metrics')
+def metrics():
+    res=[]
+    for k,v in graphs.items():
+        res.append(prometheus_client.generate_latest(v))
+    return Response(res, mimetype="text/plain")
+
 @app.route('/')
 def hello_world():
+    graphs['c'].inc()
+    graphs['s'].observe(4.7)
+    graphs['h'].observe(4.7)
+    graphs['e'].state('running')
     return render_template('default.html')
 
 @app.route('/submit',methods=['GET','POST'])
@@ -102,7 +124,7 @@ def delete():
                 conn.commit()
                 val="Deleted All elements Successful!"
     return render_template('deleted.html',value=val)
-            
+        
 
 if __name__=='__main__':
     app.run(host='0.0.0.0',port=5000,debug=True)
