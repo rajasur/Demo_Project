@@ -47,10 +47,30 @@ metadata:
   name: flaskapi
 spec:
   ports:
-  - port: 5000
+  - name: service
+    port: 5000
     protocol: TCP
     targetPort: 5000
     nodePort: 31000 
   type: NodePort
   selector:
     app: flaskapi
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitoring-python-app
+  labels:
+    release: monitoring 
+    app: flaskapi
+spec:
+  endpoints:
+  - path: /metrics
+    port: service
+    targetPort: 3000 
+  namespaceSelector:
+    matchNames:
+    - python-flask
+
+
