@@ -1,0 +1,12 @@
+serviceMonitor:
+  namespace: mysql
+  enabled: true
+  additionalLabels:
+    release: prometheus
+
+mysql:
+  db: "Food"
+  host: "mysql"
+  pass: "admin"
+  port: 3306
+  user: "root"
