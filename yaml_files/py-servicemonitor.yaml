@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitoring-python-app
+  labels:
+    release: prometheus 
+    app: flaskapi
+  namespace: application
+spec:
+  endpoints:
+  - path: /metrics
+    port: sap
+    targetPort: 5000
+  namespaceSelector:
+    matchNames:
+    - application
+  selector:
+    matchLabels:
+      app: flaskapi 
