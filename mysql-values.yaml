@@ -1,9 +1,20 @@
 serviceMonitor:
-  namespace: mysql
+  namespace: monitoring
   enabled: true
   additionalLabels:
     release: prometheus
 
+
+collectors:
+  info_schema.innodb_tablespaces: true
+  info_schema.tablestats: true
+  info_schema.schemastats: true
+  info_schema.userstats: true
+  perf_schema.tablelocks: true
+  heartbeat: true
+  heartbeat.database: heartbeat
+  heartbeat.table: heartbeat
+  
 mysql:
   db: "Food"
   host: "mysql"

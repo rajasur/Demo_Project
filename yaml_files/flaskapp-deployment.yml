@@ -45,35 +45,17 @@ apiVersion: v1
 kind: Service
 metadata:
   name: flaskapi
+  labels: 
+    app:  flaskapi
 spec:
   ports:
-  - port: 5000
-    name: sap
+  - name: sap
     protocol: TCP
+    port: 5000
     targetPort: 5000
     nodePort: 32000 
   type: NodePort
   selector:
     app: flaskapi
-
----
-apiVersion: monitoring.coreos.com/v1
-kind: ServiceMonitor
-metadata:
-  name: monitoring-python-app
-  labels:
-    release: monitoring 
-    app: flaskapi
-spec:
-  endpoints:
-  - path: /metrics
-    port: sap
-    targetPort: 32000
-  namespaceSelector:
-    matchNames:
-    - mysql
-  selector:
-    matchLabels:
-      app: flaskapi 
 
 

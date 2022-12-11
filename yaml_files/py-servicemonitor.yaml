@@ -5,10 +5,10 @@ metadata:
   labels:
     release: prometheus 
     app: flaskapi
-  namespace: application
+  namespace: monitoring
 spec:
-  endpoints:
-  - path: /metrics
+  endpoints:  
+  - path: http://192.168.49.2:32000/metrics
     port: sap
     targetPort: 5000
   namespaceSelector:
