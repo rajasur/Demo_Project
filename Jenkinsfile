@@ -5,7 +5,7 @@ pipeline{
             steps{
                 //sh git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/rajasur/Demo_Project.git'
 
-                echo "Hello world webhook test ec3 ins"
+                echo "Hello world webhook test ec2 ins"
             }
         }
     }
