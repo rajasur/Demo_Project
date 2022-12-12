@@ -5,7 +5,7 @@ pipeline{
             steps{
                 //sh git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/rajasur/Demo_Project.git'
 
-                echo "Hello world raja sur"
+                echo "Hello world raja sur 1"
             }
         }
     }
